@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 from modules.protocol import ProtocolHandler
 from modules.error_handling import Disconnect, CommandError, Error
@@ -31,17 +31,14 @@ class TestProtocolHandler(unittest.TestCase):
         self.assertEqual(result, 42)
 
     def test_handle_string(self):
-        # Prepare a mock socket_file with desired behavior
         socket_file = MagicMock()
-        socket_file.readline.return_value = b"10\r\n"  # Simulate length of 10
+        socket_file.readline.return_value = b"10\r\n"
         socket_file.read.return_value = b"Hello World\r\n"
 
-        # Call the method under test
         result = ProtocolHandler().handle_string(socket_file)
 
-        # Assert the expected behavior
         socket_file.readline.assert_called_once()
-        socket_file.read.assert_called_once_with(12)  # length (10) + trailing \r\n (2)
+        socket_file.read.assert_called_once_with(12)
         self.assertEqual(result, b"Hello World")
 
     def test_handle_string_null(self):
@@ -53,21 +50,15 @@ class TestProtocolHandler(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_handle_array(self):
-        # Prepare a mock socket_file with desired behavior
         socket_file = MagicMock()
-        socket_file.readline.return_value = b"3\r\n"  # Simulate num_elements as 3
+        socket_file.readline.return_value = b"3\r\n"
         socket_file.read.return_value = b"A"
 
-        # Create an instance of your class
-        result = ProtocolHandler()
+        protocol_handler = ProtocolHandler()
+        protocol_handler.handle_request = MagicMock(side_effect=[1, 2, 3])
 
-        # Mock the handler methods
-        result.handle_request = MagicMock(side_effect=[1, 2, 3])
+        result = protocol_handler.handle_array(socket_file)
 
-        # Call the method under test
-        result = result.handle_array(socket_file)
-
-        # Assert the expected behavior
         socket_file.readline.assert_called_once()
         self.assertEqual(result, [1, 2, 3])
 

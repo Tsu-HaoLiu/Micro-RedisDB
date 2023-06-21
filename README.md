@@ -1,7 +1,7 @@
 # Micro-RedisDB
 
 
-Start the database by running `python server.py`
+Start the database by running `./start_server.sh`
 
 To test the server, launch a new terminal 
 

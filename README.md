@@ -3,7 +3,7 @@
 
 Start the database by running `./start_server.sh`
 
-To test the server, launch a new terminal 
+To test the server, launch a new python terminal 
 
 ```
 >>> from modules.client import Client

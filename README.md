@@ -1,9 +1,18 @@
-# Micro-RedisDB
+# Miniature RedisDB
 
+This is a miniature Redis-like in-memory key-value store implemented in Python.
+
+## Features
+
+- Key-value storage in memory
+- Support for basic Redis commands: SET, GET, DELETE, FLUSH, MGET, MSET 
+- Multi-threaded handling of requests using gevent
+
+## Usage
 
 Start the database by running `./start_server.sh`
 
-To test the server, launch a new python terminal 
+RedisDB server will start on 127.0.0.1 port 31337. You can then connect to it like you would with Redis: 
 
 ```
 >>> from modules.client import Client
@@ -22,3 +31,22 @@ To test the server, launch a new python terminal
 [None, 4, {'value_dict': {'inner_value': 0, 'inner_value2': ['list1', 2, 3]}}]
 
 ```
+
+## Commands 
+
+- SET - Set the value for a key
+- GET - Get the value for a key
+- DELETE - Delete a key
+- FLUSH - Delete all keys
+- MGET - Get multple values at once
+- MSET - Set multple values at once
+
+---
+## TODO
+
+This is a minimal implementation to demonstrate a simple Redis-like server in Python. 
+Further improvements could include:
+
+- Support for more Redis commands
+- More robust error handling and logging
+- Support client disconnects and subsequent reconnections

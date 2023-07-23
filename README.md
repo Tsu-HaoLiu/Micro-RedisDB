@@ -12,7 +12,7 @@ This is a miniature Redis-like in-memory key-value store implemented in Python.
 
 Start the database by running `./start_server.sh`
 
-RedisDB server will start on 127.0.0.1 port 31337. You can then connect to it like you would with Redis: 
+RedisDB server will start on 127.0.0.1 port 31337. You can then connect to it with sockets or using the client module included in repo:
 
 ```
 >>> from modules.client import Client

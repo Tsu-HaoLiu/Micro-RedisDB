@@ -16,10 +16,10 @@ class Client(object):
         print(f'Heard response from client {args[0]}: {args}')
 
         self._protocol.write_response(self._fh, args)
-        resp = self._protocol.handle_request(self._fh)
-        if isinstance(resp, Error):
-            raise CommandError(resp.message)
-        return resp
+        response = self._protocol.handle_request(self._fh)
+        if isinstance(response, Error):
+            raise CommandError(response.message)
+        return response
 
     def get(self, key):
         return self.execute('GET', key)
